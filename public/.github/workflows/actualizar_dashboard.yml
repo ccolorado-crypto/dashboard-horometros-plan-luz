@@ -1,1 +1,37 @@
+name: Actualizar Dashboard Automatico
 
+on:
+  push:
+    paths:
+      - 'data/**'
+      - 'generador_dashboard.py'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar librerías
+        run: |
+          pip install -r requirements.txt
+
+      - name: Ejecutar generador_dashboard.py
+        run: |
+          python generador_dashboard.py
+
+      - name: Guardar cambios en el repositorio
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add public/dashboard_data.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizacion automatica de horometros [skip ci]" && git push)
