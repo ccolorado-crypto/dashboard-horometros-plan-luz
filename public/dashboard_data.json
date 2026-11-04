@@ -8,7 +8,9 @@
         "anos_contrato": 5.0,
         "fecha_inicio": "2022-08-17",
         "fecha_fin": "2027-08-16",
-        "consumo_2026": 1.6,
+        "consumo_2026": 0.1,
+        "meses_ciclo": 1,
+        "ano_texto": "Año 5 de 5",
         "estado": "Normal",
         "regional": "MED",
         "historial": [
@@ -33,6 +35,8 @@
         "fecha_inicio": "2018-11-01",
         "fecha_fin": "2028-10-31",
         "consumo_2026": 0.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 8 de 10",
         "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
@@ -57,6 +61,8 @@
         "fecha_inicio": "2019-11-02",
         "fecha_fin": "2024-11-01",
         "consumo_2026": 42.1,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 7 de 7 (Vencido)",
         "estado": "Normal",
         "regional": "PEI",
         "historial": [
@@ -81,6 +87,8 @@
         "fecha_inicio": "2021-12-22",
         "fecha_fin": "2026-12-21",
         "consumo_2026": 27.9,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 5 de 5",
         "estado": "Normal",
         "regional": "BQL",
         "historial": [
@@ -104,7 +112,9 @@
         "anos_contrato": 10.0,
         "fecha_inicio": "2019-05-26",
         "fecha_fin": "2029-05-25",
-        "consumo_2026": 117.2,
+        "consumo_2026": 46.5,
+        "meses_ciclo": 4,
+        "ano_texto": "Año 8 de 10",
         "estado": "Normal",
         "regional": "MED",
         "historial": [
@@ -129,6 +139,8 @@
         "fecha_inicio": "2022-11-01",
         "fecha_fin": "2027-10-31",
         "consumo_2026": 37.2,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 4 de 5",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -152,7 +164,9 @@
         "anos_contrato": 5.0,
         "fecha_inicio": "2022-07-16",
         "fecha_fin": "2027-07-15",
-        "consumo_2026": 62.9,
+        "consumo_2026": 11.7,
+        "meses_ciclo": 2,
+        "ano_texto": "Año 5 de 5",
         "estado": "Normal",
         "regional": "BQL",
         "historial": [
@@ -177,6 +191,8 @@
         "fecha_inicio": "2018-09-07",
         "fecha_fin": "2033-09-06",
         "consumo_2026": 0.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 8 de 15",
         "estado": "Inactivo",
         "regional": "PEI",
         "historial": [
@@ -201,6 +217,8 @@
         "fecha_inicio": "2022-11-28",
         "fecha_fin": "2027-11-27",
         "consumo_2026": 3.4,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 4 de 5",
         "estado": "Normal",
         "regional": "MED",
         "historial": [
@@ -225,6 +243,8 @@
         "fecha_inicio": "2020-12-18",
         "fecha_fin": "2025-12-17",
         "consumo_2026": 17.4,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 6 de 5 (Vencido)",
         "estado": "Normal",
         "regional": "PEI",
         "historial": [
@@ -248,8 +268,10 @@
         "anos_contrato": 10.0,
         "fecha_inicio": "2020-06-18",
         "fecha_fin": "2029-06-17",
-        "consumo_2026": 36.7,
-        "estado": "Normal",
+        "consumo_2026": 0.0,
+        "meses_ciclo": 3,
+        "ano_texto": "Año 7 de 10",
+        "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
             710.5,
@@ -273,6 +295,8 @@
         "fecha_inicio": "2020-10-24",
         "fecha_fin": "2035-10-23",
         "consumo_2026": 168.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 6 de 15",
         "estado": "Alerta",
         "regional": "IBG",
         "historial": [
@@ -297,6 +321,8 @@
         "fecha_inicio": "2023-05-15",
         "fecha_fin": "2028-05-14",
         "consumo_2026": 0.0,
+        "meses_ciclo": 4,
+        "ano_texto": "Año 4 de 5",
         "estado": "Inactivo",
         "regional": "MED",
         "historial": [
@@ -321,6 +347,8 @@
         "fecha_inicio": "2023-10-01",
         "fecha_fin": "2038-09-30",
         "consumo_2026": 549.3,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 3 de 15",
         "estado": "Excedido",
         "regional": "BQL",
         "historial": [
@@ -345,6 +373,8 @@
         "fecha_inicio": "2022-11-01",
         "fecha_fin": "2027-10-31",
         "consumo_2026": 3.2,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 4 de 5",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -368,7 +398,9 @@
         "anos_contrato": 10.0,
         "fecha_inicio": "2018-04-20",
         "fecha_fin": "2028-04-19",
-        "consumo_2026": 12.1,
+        "consumo_2026": 11.6,
+        "meses_ciclo": 5,
+        "ano_texto": "Año 9 de 10",
         "estado": "Normal",
         "regional": "CAL",
         "historial": [
@@ -392,8 +424,10 @@
         "anos_contrato": 15.0,
         "fecha_inicio": "2023-11-23",
         "fecha_fin": "1938-11-22",
-        "consumo_2026": -45.0,
-        "estado": "Normal",
+        "consumo_2026": 0.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 3 de 15",
+        "estado": "Inactivo",
         "regional": "MED",
         "historial": [
             45.0,
@@ -417,6 +451,8 @@
         "fecha_inicio": "2019-09-09",
         "fecha_fin": "2024-09-08",
         "consumo_2026": 0.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 7 de 10 (Vencido)",
         "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
@@ -441,6 +477,8 @@
         "fecha_inicio": "2017-09-01",
         "fecha_fin": "2027-08-31",
         "consumo_2026": 4.4,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 10 de 10",
         "estado": "Normal",
         "regional": "CAL",
         "historial": [
@@ -465,6 +503,8 @@
         "fecha_inicio": "2017-12-01",
         "fecha_fin": "2027-11-30",
         "consumo_2026": 4.6,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 9 de 10",
         "estado": "Normal",
         "regional": "CAL",
         "historial": [
@@ -489,6 +529,8 @@
         "fecha_inicio": "2018-11-15",
         "fecha_fin": "2024-11-14",
         "consumo_2026": 4.1,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 8 de 6 (Vencido)",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -513,6 +555,8 @@
         "fecha_inicio": "2022-12-15",
         "fecha_fin": "2027-12-14",
         "consumo_2026": 0.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 4 de 5",
         "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
@@ -537,6 +581,8 @@
         "fecha_inicio": "2021-09-21",
         "fecha_fin": "2026-09-20",
         "consumo_2026": 1.5,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 5 de 5",
         "estado": "Normal",
         "regional": "MED",
         "historial": [
@@ -560,8 +606,10 @@
         "anos_contrato": 5.0,
         "fecha_inicio": "2019-07-24",
         "fecha_fin": "2029-08-31",
-        "consumo_2026": 51.7,
-        "estado": "Normal",
+        "consumo_2026": 0.0,
+        "meses_ciclo": 2,
+        "ano_texto": "Año 8 de 5",
+        "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
             423.5,
@@ -585,6 +633,8 @@
         "fecha_inicio": "2019-01-09",
         "fecha_fin": "2028-01-08",
         "consumo_2026": 18.6,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 8 de 10",
         "estado": "Normal",
         "regional": "BQL",
         "historial": [
@@ -609,6 +659,8 @@
         "fecha_inicio": "2021-11-16",
         "fecha_fin": "2036-11-15",
         "consumo_2026": 5.8,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 5 de 15",
         "estado": "Normal",
         "regional": "IBG",
         "historial": [
@@ -633,6 +685,8 @@
         "fecha_inicio": "2018-12-13",
         "fecha_fin": "2027-12-12",
         "consumo_2026": 18.5,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 8 de 9",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -656,7 +710,9 @@
         "anos_contrato": 15.0,
         "fecha_inicio": "2021-02-15",
         "fecha_fin": "2036-02-14",
-        "consumo_2026": 4.6,
+        "consumo_2026": 4.4,
+        "meses_ciclo": 7,
+        "ano_texto": "Año 6 de 15",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -680,7 +736,9 @@
         "anos_contrato": 10.0,
         "fecha_inicio": "2018-03-05",
         "fecha_fin": "2028-03-04",
-        "consumo_2026": 56.7,
+        "consumo_2026": 43.9,
+        "meses_ciclo": 6,
+        "ano_texto": "Año 9 de 10",
         "estado": "Normal",
         "regional": "PEI",
         "historial": [
@@ -705,6 +763,8 @@
         "fecha_inicio": "2020-02-19",
         "fecha_fin": "2029-02-18",
         "consumo_2026": 0.0,
+        "meses_ciclo": 7,
+        "ano_texto": "Año 7 de 10",
         "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
@@ -729,6 +789,8 @@
         "fecha_inicio": "2023-10-01",
         "fecha_fin": "2038-09-30",
         "consumo_2026": 55.4,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 3 de 15",
         "estado": "Normal",
         "regional": "BQL",
         "historial": [
@@ -753,6 +815,8 @@
         "fecha_inicio": "2018-12-06",
         "fecha_fin": "2028-12-05",
         "consumo_2026": 60.4,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 8 de 10",
         "estado": "Normal",
         "regional": "BQL",
         "historial": [
@@ -777,6 +841,8 @@
         "fecha_inicio": "2021-04-21",
         "fecha_fin": "2036-04-20",
         "consumo_2026": 0.3,
+        "meses_ciclo": 5,
+        "ano_texto": "Año 6 de 15",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -800,7 +866,9 @@
         "anos_contrato": 10.0,
         "fecha_inicio": "2018-03-21",
         "fecha_fin": "2028-03-20",
-        "consumo_2026": 18.6,
+        "consumo_2026": 14.1,
+        "meses_ciclo": 6,
+        "ano_texto": "Año 9 de 10",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -825,6 +893,8 @@
         "fecha_inicio": "2017-09-15",
         "fecha_fin": "2024-09-14",
         "consumo_2026": 10.6,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 9 de 10 (Vencido)",
         "estado": "Normal",
         "regional": "MED",
         "historial": [
@@ -849,6 +919,8 @@
         "fecha_inicio": "2023-05-18",
         "fecha_fin": "2033-05-17",
         "consumo_2026": 0.0,
+        "meses_ciclo": 4,
+        "ano_texto": "Año 4 de 10",
         "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
@@ -873,6 +945,8 @@
         "fecha_inicio": "2023-10-01",
         "fecha_fin": "2038-09-30",
         "consumo_2026": 55.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 3 de 15",
         "estado": "Normal",
         "regional": "BQL",
         "historial": [
@@ -897,6 +971,8 @@
         "fecha_inicio": "2021-09-01",
         "fecha_fin": "2026-08-31",
         "consumo_2026": 15.3,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 6 de 5 (Vencido)",
         "estado": "Normal",
         "regional": "CAL",
         "historial": [
@@ -920,7 +996,9 @@
         "anos_contrato": 6.0,
         "fecha_inicio": "2020-04-26",
         "fecha_fin": "2025-04-25",
-        "consumo_2026": 8.9,
+        "consumo_2026": 4.5,
+        "meses_ciclo": 5,
+        "ano_texto": "Año 7 de 6 (Vencido)",
         "estado": "Normal",
         "regional": "MED",
         "historial": [
@@ -945,6 +1023,8 @@
         "fecha_inicio": "2022-11-28",
         "fecha_fin": "2027-11-27",
         "consumo_2026": 2.3,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 4 de 5",
         "estado": "Normal",
         "regional": "MED",
         "historial": [
@@ -968,7 +1048,9 @@
         "anos_contrato": 5.0,
         "fecha_inicio": "2022-04-13",
         "fecha_fin": "2027-04-12",
-        "consumo_2026": 15.3,
+        "consumo_2026": 9.3,
+        "meses_ciclo": 5,
+        "ano_texto": "Año 5 de 5",
         "estado": "Normal",
         "regional": "CAL",
         "historial": [
@@ -993,6 +1075,8 @@
         "fecha_inicio": "2018-11-01",
         "fecha_fin": "2028-10-31",
         "consumo_2026": 0.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 8 de 10",
         "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
@@ -1017,6 +1101,8 @@
         "fecha_inicio": "2020-09-24",
         "fecha_fin": "2025-09-23",
         "consumo_2026": 0.3,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 6 de 5 (Vencido)",
         "estado": "Normal",
         "regional": "MED",
         "historial": [
@@ -1041,6 +1127,8 @@
         "fecha_inicio": "2018-12-13",
         "fecha_fin": "2025-12-12",
         "consumo_2026": 38.7,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 8 de 7 (Vencido)",
         "estado": "Normal",
         "regional": "BQL",
         "historial": [
@@ -1065,6 +1153,8 @@
         "fecha_inicio": "2017-09-01",
         "fecha_fin": "2027-08-31",
         "consumo_2026": 22.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 10 de 10",
         "estado": "Normal",
         "regional": "CAL",
         "historial": [
@@ -1084,11 +1174,13 @@
         "nombre": "COLCERAMICA LA ESTRELLA - PLAN LUZ - MED009",
         "potencia": 300.0,
         "horas_pactadas": 200.0,
-        "contrato": "N/A",
+        "contrato": "nan",
         "anos_contrato": 10.0,
         "fecha_inicio": "2018-02-20",
         "fecha_fin": "2028-02-19",
-        "consumo_2026": 3.3,
+        "consumo_2026": 1.8,
+        "meses_ciclo": 7,
+        "ano_texto": "Año 9 de 10",
         "estado": "Normal",
         "regional": "MED",
         "historial": [
@@ -1113,6 +1205,8 @@
         "fecha_inicio": "2020-11-27",
         "fecha_fin": "2030-11-26",
         "consumo_2026": 0.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 6 de 10",
         "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
@@ -1137,6 +1231,8 @@
         "fecha_inicio": "2022-01-21",
         "fecha_fin": "2037-01-20",
         "consumo_2026": 26.4,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 5 de 15",
         "estado": "Normal",
         "regional": "BQL",
         "historial": [
@@ -1161,6 +1257,8 @@
         "fecha_inicio": "2022-01-21",
         "fecha_fin": "2037-01-20",
         "consumo_2026": 32.6,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 5 de 15",
         "estado": "Normal",
         "regional": "BQL",
         "historial": [
@@ -1185,6 +1283,8 @@
         "fecha_inicio": "2022-09-09",
         "fecha_fin": "2027-09-08",
         "consumo_2026": 6.3,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 4 de 5",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -1204,11 +1304,12 @@
         "nombre": "CENTRO DE TECNOLOGIA OFTALMICA - PLAN LUZ - BOG1895",
         "potencia": 0.0,
         "horas_pactadas": 200.0,
-        "contrato": "N/A",
+        "contrato": "nan",
         "anos_contrato": 0.0,
         "fecha_inicio": "N/A",
         "fecha_fin": "N/A",
         "consumo_2026": 10.2,
+        "ano_texto": "Sin vigencia",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -1233,6 +1334,8 @@
         "fecha_inicio": "2017-09-18",
         "fecha_fin": "2027-09-17",
         "consumo_2026": 38.8,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 9 de 10",
         "estado": "Normal",
         "regional": "CAL",
         "historial": [
@@ -1256,7 +1359,9 @@
         "anos_contrato": 10.0,
         "fecha_inicio": "2023-06-14",
         "fecha_fin": "2033-06-13",
-        "consumo_2026": 39.4,
+        "consumo_2026": 39.0,
+        "meses_ciclo": 3,
+        "ano_texto": "Año 4 de 10",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -1280,7 +1385,9 @@
         "anos_contrato": 5.0,
         "fecha_inicio": "2022-07-16",
         "fecha_fin": "2027-07-15",
-        "consumo_2026": 119.9,
+        "consumo_2026": 19.1,
+        "meses_ciclo": 2,
+        "ano_texto": "Año 5 de 5",
         "estado": "Normal",
         "regional": "BQL",
         "historial": [
@@ -1304,8 +1411,10 @@
         "anos_contrato": 10.0,
         "fecha_inicio": "2017-12-01",
         "fecha_fin": "2027-12-01",
-        "consumo_2026": -4.6,
-        "estado": "Normal",
+        "consumo_2026": 0.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 9 de 10",
+        "estado": "Inactivo",
         "regional": "CAL",
         "historial": [
             121.0,
@@ -1329,6 +1438,8 @@
         "fecha_inicio": "2021-02-13",
         "fecha_fin": "2026-02-12",
         "consumo_2026": 0.0,
+        "meses_ciclo": 7,
+        "ano_texto": "Año 6 de 5 (Vencido)",
         "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
@@ -1352,7 +1463,9 @@
         "anos_contrato": 10.0,
         "fecha_inicio": "2021-06-18",
         "fecha_fin": "2031-06-17",
-        "consumo_2026": 27.0,
+        "consumo_2026": 11.3,
+        "meses_ciclo": 3,
+        "ano_texto": "Año 6 de 10",
         "estado": "Normal",
         "regional": "BOG",
         "historial": [
@@ -1377,6 +1490,8 @@
         "fecha_inicio": "2022-12-25",
         "fecha_fin": "2032-12-24",
         "consumo_2026": 0.0,
+        "meses_ciclo": 8,
+        "ano_texto": "Año 4 de 10",
         "estado": "Inactivo",
         "regional": "MED",
         "historial": [
@@ -1400,8 +1515,10 @@
         "anos_contrato": 10.0,
         "fecha_inicio": "2020-06-18",
         "fecha_fin": "2029-06-17",
-        "consumo_2026": 31.8,
-        "estado": "Normal",
+        "consumo_2026": 0.0,
+        "meses_ciclo": 3,
+        "ano_texto": "Año 7 de 10",
+        "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
             687.6,
@@ -1425,6 +1542,8 @@
         "fecha_inicio": "2021-02-17",
         "fecha_fin": "2026-02-16",
         "consumo_2026": 0.0,
+        "meses_ciclo": 7,
+        "ano_texto": "Año 6 de 5 (Vencido)",
         "estado": "Inactivo",
         "regional": "BQL",
         "historial": [
