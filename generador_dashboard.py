@@ -4,25 +4,33 @@ import math
 import pandas as pd
 import datetime
 
+# 1. Localizar archivo Excel en data/
 data_dir = 'data'
-xlsx_files = [f for f in os.listdir(data_dir) if f.endswith('.xlsx')] if os.path.exists(data_dir) else []
+xlsx_files = [f for f in os.listdir(data_dir) if f.endswith('.xlsx') and not f.startswith('~$')] if os.path.exists(data_dir) else []
 excel_path = os.path.join(data_dir, xlsx_files[0]) if xlsx_files else 'Horometros .xlsx'
 
 df_raw = pd.read_excel(excel_path, sheet_name='Hoja 1')
-corte_dt = pd.Timestamp('2026-09-01')
 
-# Detect monthly 2026 columns
-hist_cols = [c for c in df_raw.columns if '2026' in str(c)]
+# 2. Detectar dinamicamente todas las columnas de lecturas mensuales de fecha
 date_cols_dict = {}
-for c in hist_cols:
-    if isinstance(c, datetime.datetime):
-        date_cols_dict[c.month] = c
+for c in df_raw.columns:
+    if c in ['FECHA CONTRATO (Resumen)', 'FECHA ACTA INICIO (Resumen)', 'FECHA FIN (Resumen)']:
+        continue
+    if isinstance(c, (datetime.datetime, pd.Timestamp)):
+        date_cols_dict[pd.to_datetime(c)] = c
     else:
         try:
-            parsed = pd.to_datetime(c)
-            date_cols_dict[parsed.month] = c
+            dt = pd.to_datetime(c)
+            if 2020 <= dt.year <= 2040:
+                date_cols_dict[dt] = c
         except:
             pass
+
+# Ordenar cronológicamente
+sorted_dates = sorted(date_cols_dict.keys())
+corte_dt = sorted_dates[-1] # La última columna existente (ej. Sep, Oct, Nov...)
+col_corte = date_cols_dict[corte_dt]
+col_inicio_ano = date_cols_dict[sorted_dates[0]]
 
 def safe_float(val, default=0.0):
     try:
@@ -52,9 +60,11 @@ for index, row in df_raw.iterrows():
     if regional not in ['MED', 'BOG', 'BQL', 'CAL', 'PEI', 'IBG']:
         regional = "OTRO"
 
+    val_corte = safe_float(row.get(col_corte), 0.0)
+
     if pd.isna(f_ini):
-        # Fallback if no start date
-        consumo = safe_float(row.get(hist_cols[-1])) - safe_float(row.get(hist_cols[0]))
+        val_ini_ano = safe_float(row.get(col_inicio_ano), 0.0)
+        consumo = max(val_corte - val_ini_ano, 0.0)
         clean_data.append({
             'id': id_val,
             'nombre': str(row.get('Nombre Artimo', 'N/A')),
@@ -65,19 +75,20 @@ for index, row in df_raw.iterrows():
             'fecha_inicio': inicio_str,
             'fecha_fin': fin_str,
             'consumo_2026': round(consumo, 1),
+            'meses_ciclo': len(sorted_dates) - 1,
             'ano_texto': "Sin vigencia",
             'estado': "Normal" if consumo <= horas_pactadas_num else "Excedido",
             'regional': regional,
-            'historial': [round(safe_float(row[c], 0.0), 1) for c in hist_cols]
+            'historial': [round(safe_float(row.get(date_cols_dict[d])), 1) for d in sorted_dates]
         })
         continue
-        
-    # Check if expired
+
+    # Verificar si está vencido
     expired = False
     if pd.notnull(f_fin) and corte_dt > f_fin and f_fin.year > 2000:
         expired = True
         
-    # Calculate current contract year
+    # Calcular en qué año contractual va
     years_passed = corte_dt.year - f_ini.year
     if (corte_dt.month, corte_dt.day) < (f_ini.month, f_ini.day):
         years_passed -= 1
@@ -88,26 +99,29 @@ for index, row in df_raw.iterrows():
     if expired:
         ano_texto += " (Vencido)"
         
-    start_month = f_ini.month
-    col_sep = date_cols_dict.get(9, hist_cols[-1])
-    val_sep = safe_float(row.get(col_sep), 0.0)
-    
-    # Contract Year active logic for 2026 slice
-    if 1 <= start_month <= 8:
-        col_inicio_ciclo = date_cols_dict.get(start_month, hist_cols[0])
-        val_inicio = safe_float(row.get(col_inicio_ciclo), 0.0)
-        consumo_periodo = val_sep - val_inicio
-        meses_ciclo = 9 - start_month
+    # Determinar la fecha de inicio del ciclo contractual actual
+    if (corte_dt.month, corte_dt.day) >= (f_ini.month, f_ini.day):
+        start_cycle_dt = pd.Timestamp(year=corte_dt.year, month=f_ini.month, day=1)
     else:
-        col_inicio_ciclo = date_cols_dict.get(1, hist_cols[0])
-        val_inicio = safe_float(row.get(col_inicio_ciclo), 0.0)
-        consumo_periodo = val_sep - val_inicio
-        meses_ciclo = 8
+        start_cycle_dt = pd.Timestamp(year=corte_dt.year - 1, month=f_ini.month, day=1)
         
-    if consumo_periodo < 0:
-        consumo_periodo = 0.0
-        
-    limite_proporcional = (horas_pactadas_num / 12.0) * max(meses_ciclo, 1)
+    # Buscar la columna en sorted_dates más cercana o igual a start_cycle_dt
+    # Si start_cycle_dt es anterior a la primera fecha disponible en el Excel, usamos la primera fecha
+    fechas_disponibles_ciclo = [d for d in sorted_dates if d >= start_cycle_dt]
+    if fechas_disponibles_ciclo:
+        fecha_inicio_evaluada = fechas_disponibles_ciclo[0]
+    else:
+        fecha_inicio_evaluada = sorted_dates[0]
+
+    val_base = safe_float(row.get(date_cols_dict[fecha_inicio_evaluada]), 0.0)
+    consumo_periodo = max(val_corte - val_base, 0.0)
+
+    # Calcular meses transcurridos en el ciclo evaluado
+    meses_ciclo = (corte_dt.year - fecha_inicio_evaluada.year) * 12 + (corte_dt.month - fecha_inicio_evaluada.month)
+    if meses_ciclo <= 0:
+        meses_ciclo = 1 # Mes de inicio
+
+    limite_proporcional = (horas_pactadas_num / 12.0) * meses_ciclo
     
     if consumo_periodo == 0:
         estado = "Inactivo"
@@ -132,12 +146,11 @@ for index, row in df_raw.iterrows():
         'ano_texto': ano_texto,
         'estado': estado,
         'regional': regional,
-        'historial': [round(safe_float(row[c], 0.0), 1) for c in hist_cols]
+        'historial': [round(safe_float(row.get(date_cols_dict[d])), 1) for d in sorted_dates]
     })
 
 os.makedirs('public', exist_ok=True)
 with open(os.path.join('public', 'dashboard_data.json'), 'w', encoding='utf-8') as f:
     json.dump(clean_data, f, ensure_ascii=False, indent=4)
 
-print(f"Generado con éxito: {len(clean_data)} generadores procesados (Año en curso).")
-
+print(f"Generado dinámicamente: {len(clean_data)} generadores procesados al corte {corte_dt.strftime('%Y-%m-%d')}.")
