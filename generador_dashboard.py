@@ -7,11 +7,11 @@ import datetime
 # 1. Localizar archivo Excel en data/
 data_dir = 'data'
 xlsx_files = [f for f in os.listdir(data_dir) if f.endswith('.xlsx') and not f.startswith('~$')] if os.path.exists(data_dir) else []
-excel_path = os.path.join(data_dir, xlsx_files[0]) if xlsx_files else 'Horometros .xlsx'
+excel_path = os.path.join(data_dir, xlsx_files[0]) if xlsx_files else 'Horometros.xlsx'
 
 df_raw = pd.read_excel(excel_path, sheet_name='Hoja 1')
 
-# 2. Detectar dinamicamente todas las columnas de lecturas mensuales de fecha
+# 2. Detectar dinámicamente las columnas mensuales de fechas
 date_cols_dict = {}
 for c in df_raw.columns:
     if c in ['FECHA CONTRATO (Resumen)', 'FECHA ACTA INICIO (Resumen)', 'FECHA FIN (Resumen)']:
@@ -26,9 +26,8 @@ for c in df_raw.columns:
         except:
             pass
 
-# Ordenar cronológicamente
 sorted_dates = sorted(date_cols_dict.keys())
-corte_dt = sorted_dates[-1] # La última columna existente (ej. Sep, Oct, Nov...)
+corte_dt = sorted_dates[-1]
 col_corte = date_cols_dict[corte_dt]
 col_inicio_ano = date_cols_dict[sorted_dates[0]]
 
@@ -83,12 +82,10 @@ for index, row in df_raw.iterrows():
         })
         continue
 
-    # Verificar si está vencido
     expired = False
     if pd.notnull(f_fin) and corte_dt > f_fin and f_fin.year > 2000:
         expired = True
         
-    # Calcular en qué año contractual va
     years_passed = corte_dt.year - f_ini.year
     if (corte_dt.month, corte_dt.day) < (f_ini.month, f_ini.day):
         years_passed -= 1
@@ -99,27 +96,20 @@ for index, row in df_raw.iterrows():
     if expired:
         ano_texto += " (Vencido)"
         
-    # Determinar la fecha de inicio del ciclo contractual actual
     if (corte_dt.month, corte_dt.day) >= (f_ini.month, f_ini.day):
         start_cycle_dt = pd.Timestamp(year=corte_dt.year, month=f_ini.month, day=1)
     else:
         start_cycle_dt = pd.Timestamp(year=corte_dt.year - 1, month=f_ini.month, day=1)
         
-    # Buscar la columna en sorted_dates más cercana o igual a start_cycle_dt
-    # Si start_cycle_dt es anterior a la primera fecha disponible en el Excel, usamos la primera fecha
     fechas_disponibles_ciclo = [d for d in sorted_dates if d >= start_cycle_dt]
-    if fechas_disponibles_ciclo:
-        fecha_inicio_evaluada = fechas_disponibles_ciclo[0]
-    else:
-        fecha_inicio_evaluada = sorted_dates[0]
+    fecha_inicio_evaluada = fechas_disponibles_ciclo[0] if fechas_disponibles_ciclo else sorted_dates[0]
 
     val_base = safe_float(row.get(date_cols_dict[fecha_inicio_evaluada]), 0.0)
     consumo_periodo = max(val_corte - val_base, 0.0)
 
-    # Calcular meses transcurridos en el ciclo evaluado
     meses_ciclo = (corte_dt.year - fecha_inicio_evaluada.year) * 12 + (corte_dt.month - fecha_inicio_evaluada.month)
     if meses_ciclo <= 0:
-        meses_ciclo = 1 # Mes de inicio
+        meses_ciclo = 1
 
     limite_proporcional = (horas_pactadas_num / 12.0) * meses_ciclo
     
@@ -153,4 +143,13 @@ os.makedirs('public', exist_ok=True)
 with open(os.path.join('public', 'dashboard_data.json'), 'w', encoding='utf-8') as f:
     json.dump(clean_data, f, ensure_ascii=False, indent=4)
 
-print(f"Generado dinámicamente: {len(clean_data)} generadores procesados al corte {corte_dt.strftime('%Y-%m-%d')}.")
+# 3. Guardar metadatos de sincronización
+metadata = {
+    "corte_mes": corte_dt.strftime('%B %Y').capitalize(),
+    "fecha_corte": corte_dt.strftime('%Y-%m-%d'),
+    "ultima_actualizacion": datetime.datetime.now().strftime('%d/%m/%Y %I:%M %p')
+}
+with open(os.path.join('public', 'metadata.json'), 'w', encoding='utf-8') as f:
+    json.dump(metadata, f, ensure_ascii=False, indent=4)
+
+print(f"Completado: Corte {corte_dt.strftime('%Y-%m-%d')} procesado.")
