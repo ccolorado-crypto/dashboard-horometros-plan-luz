@@ -4,14 +4,32 @@ import math
 import pandas as pd
 import datetime
 
-# 1. Localizar archivo Excel en data/
+# 1. Localizar archivo Excel en data/ o raíz
 data_dir = 'data'
-xlsx_files = [f for f in os.listdir(data_dir) if f.endswith('.xlsx') and not f.startswith('~$')] if os.path.exists(data_dir) else []
-excel_path = os.path.join(data_dir, xlsx_files[0]) if xlsx_files else 'Horometros.xlsx'
+xlsx_files = []
+if os.path.exists(data_dir):
+    xlsx_files = [
+        os.path.join(data_dir, f) for f in os.listdir(data_dir) 
+        if f.endswith('.xlsx') and not f.startswith('~$')
+    ]
 
+# Si hay varios archivos, ordenar por fecha de modificación (el más reciente primero)
+if xlsx_files:
+    xlsx_files.sort(key=lambda x: os.path.getmtime(x), reverse=True)
+    excel_path = xlsx_files[0]
+else:
+    # Buscar en directorio actual
+    local_files = [f for f in os.listdir('.') if f.endswith('.xlsx') and not f.startswith('~$') and 'Horometros' in f]
+    if local_files:
+        local_files.sort(key=lambda x: os.path.getmtime(x), reverse=True)
+        excel_path = local_files[0]
+    else:
+        excel_path = 'Horometros.xlsx'
+
+print(f"Leyendo archivo Excel: {excel_path}")
 df_raw = pd.read_excel(excel_path, sheet_name='Hoja 1')
 
-# 2. Detectar dinámicamente las columnas mensuales de fechas
+# 2. Detectar dinámicamente columnas mensuales
 date_cols_dict = {}
 for c in df_raw.columns:
     if c in ['FECHA CONTRATO (Resumen)', 'FECHA ACTA INICIO (Resumen)', 'FECHA FIN (Resumen)']:
@@ -30,6 +48,21 @@ sorted_dates = sorted(date_cols_dict.keys())
 corte_dt = sorted_dates[-1]
 col_corte = date_cols_dict[corte_dt]
 col_inicio_ano = date_cols_dict[sorted_dates[0]]
+
+meses_es = {
+    1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun',
+    7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic'
+}
+meses_completos = {
+    1: 'Enero', 2: 'Febrero', 3: 'Marzo', 4: 'Abril', 5: 'Mayo', 6: 'Junio',
+    7: 'Julio', 8: 'Agosto', 9: 'Septiembre', 10: 'Octubre', 11: 'Noviembre', 12: 'Diciembre'
+}
+
+mes_corte_str = f"{meses_completos[corte_dt.month]} {corte_dt.year}"
+meses_labels = [meses_es[d.month] for d in sorted_dates]
+
+# Fecha y hora de actualización (formato legible en Colombia / UTC-5)
+hora_actual = (datetime.datetime.utcnow() - datetime.timedelta(hours=5)).strftime('%d/%m/%Y %I:%M %p')
 
 def safe_float(val, default=0.0):
     try:
@@ -102,7 +135,10 @@ for index, row in df_raw.iterrows():
         start_cycle_dt = pd.Timestamp(year=corte_dt.year - 1, month=f_ini.month, day=1)
         
     fechas_disponibles_ciclo = [d for d in sorted_dates if d >= start_cycle_dt]
-    fecha_inicio_evaluada = fechas_disponibles_ciclo[0] if fechas_disponibles_ciclo else sorted_dates[0]
+    if fechas_disponibles_ciclo:
+        fecha_inicio_evaluada = fechas_disponibles_ciclo[0]
+    else:
+        fecha_inicio_evaluada = sorted_dates[0]
 
     val_base = safe_float(row.get(date_cols_dict[fecha_inicio_evaluada]), 0.0)
     consumo_periodo = max(val_corte - val_base, 0.0)
@@ -139,17 +175,16 @@ for index, row in df_raw.iterrows():
         'historial': [round(safe_float(row.get(date_cols_dict[d])), 1) for d in sorted_dates]
     })
 
+payload = {
+    'corte_mes': mes_corte_str,
+    'corte_fecha': corte_dt.strftime('%Y-%m-%d'),
+    'ultima_actualizacion': hora_actual,
+    'meses_labels': meses_labels,
+    'equipos': clean_data
+}
+
 os.makedirs('public', exist_ok=True)
 with open(os.path.join('public', 'dashboard_data.json'), 'w', encoding='utf-8') as f:
-    json.dump(clean_data, f, ensure_ascii=False, indent=4)
+    json.dump(payload, f, ensure_ascii=False, indent=4)
 
-# 3. Guardar metadatos de sincronización
-metadata = {
-    "corte_mes": corte_dt.strftime('%B %Y').capitalize(),
-    "fecha_corte": corte_dt.strftime('%Y-%m-%d'),
-    "ultima_actualizacion": datetime.datetime.now().strftime('%d/%m/%Y %I:%M %p')
-}
-with open(os.path.join('public', 'metadata.json'), 'w', encoding='utf-8') as f:
-    json.dump(metadata, f, ensure_ascii=False, indent=4)
-
-print(f"Completado: Corte {corte_dt.strftime('%Y-%m-%d')} procesado.")
+print(f"Generado exitosamente: {len(clean_data)} generadores procesados al corte {mes_corte_str} ({hora_actual}).")
